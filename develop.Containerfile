@@ -3,7 +3,7 @@ FROM registry.fedoraproject.org/fedora-toolbox:latest
 WORKDIR /setup
 
 ARG BRUNO_VERSION=2.14.2
-RUN wget "https://github.com/usebruno/bruno/releases/download/v2.14.2/bruno_${BRUNO_VERSION}_x86_64_linux.rpm" -O bruno.rpm && \
+RUN wget "https://github.com/usebruno/bruno/releases/download/v${BRUNO_VERSION}/bruno_${BRUNO_VERSION}_x86_64_linux.rpm" -O bruno.rpm && \
     sudo dnf install bruno.rpm -y && rm bruno.rpm
 
 RUN wget https://dbeaver.io/files/dbeaver-ce-latest-stable.x86_64.rpm -O dbeaver.rpm && \
