@@ -1,0 +1,32 @@
+name: Build container images
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+env:
+  REGISTRY_USER: ${{ github.actor }}
+  REGISTRY_PASSWORD: ${{ github.token }}
+  REGISTRY_URL: ghcr.io/${{ github.repository_owner }}
+
+jobs:
+  build-develop:
+    runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/develop:latest
+      CONTAINERFILE: develop.Containerfile
+    steps:
+      - uses: actions/checkout@v5
+      - name: Log in to registry
+        uses: redhat-actions/podman-login@v1
+        with:
+          username: ${{ env.REGISTRY_USER }}
+          password: ${{ env.REGISTRY_PASSWORD }}
+          registry: ${{ env.REGISTRY_URL }}
+      - name: Build image
+        run: podman build -t ${{ env.IMAGE_NAME }} -f ${{ env.CONTAINERFILE }}
+      - name: Push image to registry
+        run: podman push ${{ env.IMAGE_NAME }}
