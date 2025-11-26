@@ -7,8 +7,6 @@ on:
     - cron: "0 0 * * 0"
 
 env:
-  REGISTRY_USER: ${{ github.actor }}
-  REGISTRY_PASSWORD: ${{ github.token }}
   REGISTRY_URL: ghcr.io/${{ github.repository_owner }}
 
 jobs:
@@ -24,8 +22,8 @@ jobs:
       - name: Log in to registry
         uses: redhat-actions/podman-login@v1
         with:
-          username: ${{ env.REGISTRY_USER }}
-          password: ${{ env.REGISTRY_PASSWORD }}
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
           registry: ${{ env.REGISTRY_URL }}
       - name: Build image
         run: podman build -t ${{ env.IMAGE_NAME }} -f ${{ env.CONTAINERFILE }}
