@@ -4,7 +4,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: "0 0 * * 0"
+    - cron: "0 0 * * thu"
 
 env:
   REGISTRY_URL: ghcr.io/${{ github.repository_owner }}
