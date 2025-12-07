@@ -5,7 +5,6 @@ WORKDIR /setup
 RUN sudo dnf install fuse-libs libatomic -y
 RUN sudo dnf install dotnet-sdk-10.0 python-launcher -y
 RUN sudo dnf --setopt install_weak_deps=False install neovim -y
-RUN sudo dnf install jetbrains-mono-fonts -y
 
 RUN wget https://dbeaver.io/files/dbeaver-ce-latest-stable.x86_64.rpm -O dbeaver.rpm && \
     sudo dnf install dbeaver.rpm -y && rm dbeaver.rpm
