@@ -9,7 +9,7 @@ RUN sudo dnf --setopt install_weak_deps=False install neovim -y
 RUN wget https://dbeaver.io/files/dbeaver-ce-latest-stable.x86_64.rpm -O dbeaver.rpm && \
     sudo dnf install dbeaver.rpm -y && rm dbeaver.rpm
 
-ARG BRUNO_VERSION=3.2.2
+ARG BRUNO_VERSION=3.3.0
 RUN wget "https://github.com/usebruno/bruno/releases/download/v${BRUNO_VERSION}/bruno_${BRUNO_VERSION}_x86_64_linux.rpm" -O bruno.rpm && \
     sudo dnf install bruno.rpm -y && rm bruno.rpm
 
