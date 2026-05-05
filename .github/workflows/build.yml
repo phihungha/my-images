@@ -15,8 +15,8 @@ jobs:
       packages: write
     runs-on: ubuntu-latest
     env:
-      IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}/develop:latest
-      CONTAINERFILE: develop.Containerfile
+      IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}/devel-env:latest
+      CONTAINERFILE: devel-env.Containerfile
     steps:
       - uses: actions/checkout@v5
       - name: Log in to registry
