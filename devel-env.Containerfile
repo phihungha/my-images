@@ -6,7 +6,7 @@ RUN sudo dnf install fuse-libs libatomic -y
 RUN sudo dnf install dotnet-sdk-10.0 python-launcher -y
 RUN sudo dnf --setopt install_weak_deps=False install neovim -y
 
-ARG BRUNO_VERSION=3.4.1
+ARG BRUNO_VERSION=3.4.2
 RUN wget "https://github.com/usebruno/bruno/releases/download/v${BRUNO_VERSION}/bruno_${BRUNO_VERSION}_x86_64_linux.rpm" -O bruno.rpm && \
     sudo dnf install bruno.rpm -y && rm bruno.rpm
 
