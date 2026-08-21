@@ -2,9 +2,17 @@ FROM registry.fedoraproject.org/fedora-toolbox:latest
 
 WORKDIR /setup
 
+# Use some host's binaries from container
+RUN sudo ln -sv /usr/bin/distrobox-host-exec /usr/local/bin/docker && \
+    sudo ln -sv /usr/bin/distrobox-host-exec /usr/local/bin/podman && \
+    sudo ln -sv /usr/bin/distrobox-host-exec /usr/local/bin/xdg-open
+
+# Dependencies for JetBrains apps
 RUN sudo dnf install fuse-libs libatomic -y
-RUN sudo dnf install dotnet-sdk-10.0 python-launcher ShellCheck -y
+
 RUN sudo dnf --setopt install_weak_deps=False install neovim -y
+
+RUN sudo dnf install dotnet-sdk-10.0 python-launcher ShellCheck -y
 
 ARG BRUNO_VERSION=4.1.0
 RUN wget "https://github.com/usebruno/bruno/releases/download/v${BRUNO_VERSION}/bruno_${BRUNO_VERSION}_x86_64_linux.rpm" -O bruno.rpm && \
@@ -17,7 +25,3 @@ RUN sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc && \
 RUN wget "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -O aws.zip && \
     unzip aws.zip && sudo ./aws/install && \
     rm -r aws && rm aws.zip
-
-RUN sudo ln -sv /usr/bin/distrobox-host-exec /usr/local/bin/docker && \
-    sudo ln -sv /usr/bin/distrobox-host-exec /usr/local/bin/podman && \
-    sudo ln -sv /usr/bin/distrobox-host-exec /usr/local/bin/xdg-open
