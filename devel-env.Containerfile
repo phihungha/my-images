@@ -3,7 +3,7 @@ FROM registry.fedoraproject.org/fedora-toolbox:latest
 WORKDIR /setup
 
 RUN sudo dnf install fuse-libs libatomic -y
-RUN sudo dnf install dotnet-sdk-10.0 python-launcher -y
+RUN sudo dnf install dotnet-sdk-10.0 python-launcher ShellCheck -y
 RUN sudo dnf --setopt install_weak_deps=False install neovim -y
 
 ARG BRUNO_VERSION=4.1.0
