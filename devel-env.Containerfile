@@ -16,12 +16,9 @@ RUN sudo dnf install dotnet-sdk-10.0 python-launcher ShellCheck pass -y
 
 ARG BRUNO_VERSION=4.2.1
 RUN wget "https://github.com/usebruno/bruno/releases/download/v${BRUNO_VERSION}/bruno_${BRUNO_VERSION}_x86_64_linux.rpm" -O bruno.rpm && \
-    sudo dnf install bruno.rpm -y && rm bruno.rpm
+    sudo dnf install bruno.rpm -y && \
+    rm bruno.rpm
 
 RUN sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc && \
     echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null && \
     sudo dnf install code -y
-
-RUN wget "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -O aws.zip && \
-    unzip aws.zip && sudo ./aws/install && \
-    rm -r aws && rm aws.zip
