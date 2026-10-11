@@ -5,6 +5,7 @@ WORKDIR /setup
 # Use some host's binaries from container
 RUN sudo ln -sv /usr/bin/distrobox-host-exec /usr/local/bin/docker && \
     sudo ln -sv /usr/bin/distrobox-host-exec /usr/local/bin/podman && \
+    sudo ln -sv /usr/bin/distrobox-host-exec /usr/local/bin/pass && \
     sudo ln -sv /usr/bin/distrobox-host-exec /usr/local/bin/xdg-open
 
 # Dependencies for JetBrains apps
@@ -12,7 +13,7 @@ RUN sudo dnf install fuse-libs libatomic -y
 
 RUN sudo dnf --setopt install_weak_deps=False install neovim -y
 
-RUN sudo dnf install dotnet-sdk-10.0 python-launcher ShellCheck pass -y
+RUN sudo dnf install dotnet-sdk-10.0 python-launcher ShellCheck -y
 
 ARG BRUNO_VERSION=4.2.1
 RUN wget "https://github.com/usebruno/bruno/releases/download/v${BRUNO_VERSION}/bruno_${BRUNO_VERSION}_x86_64_linux.rpm" -O bruno.rpm && \
